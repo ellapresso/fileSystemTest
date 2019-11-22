@@ -1,0 +1,12 @@
+{
+  "name": "fileSystemTest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ellapresso/fileSystemTest.git",
+  "author": "ellapresso <ellapresso@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http": "^0.0.0"
+  }
+}
