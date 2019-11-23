@@ -1,5 +1,6 @@
 const http = require('http');
 const express = require('express');
+const router = express.Route();
 
 // create server
 const app = express();
@@ -9,6 +10,8 @@ const server = http.createServer(app);
 app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/index.html`); // client1
 });
+
+app.use('/game',require('./src/api'))
 
 /**
  * 처리하지 못한 예외 로그 기록
