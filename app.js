@@ -1,11 +1,14 @@
 const http = require('http');
 const express = require('express');
 const router = express.Route();
+const bodyParser = require('body-parser');
 
 // create server
 const app = express();
 const server = http.createServer(app);
 
+/* HTTP BODY 처리 */
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/index.html`); // client1
