@@ -1,7 +1,7 @@
-const http = require('http');
-const express = require('express');
+const http = require("http");
+const express = require("express");
 const router = express.Route();
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 
 // create server
 const app = express();
@@ -10,18 +10,19 @@ const server = http.createServer(app);
 /* HTTP BODY 처리 */
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(`${__dirname}/index.html`); // client1
 });
 
-app.use('/game',require('./src/api'))
+/* routing */
+app.use("/game", require("./src/api"));
 
 /**
  * 처리하지 못한 예외 로그 기록
  */
-process.on('uncaughtException', (err) => {
-  console.log('UncaughtException', `[${err.name}] ${err.message}`);
-  console.log('UncaughtException', err.stack);
+process.on("uncaughtException", err => {
+  console.log("UncaughtException", `[${err.name}] ${err.message}`);
+  console.log("UncaughtException", err.stack);
 });
 
 /**
@@ -30,15 +31,15 @@ process.on('uncaughtException', (err) => {
  *  - 실시간 서버 연결 종료
  *  - 데이터베이스 커넥션 종료
  */
-process.on('SIGINT', () => {
-    server.close(() => {
-      console.info('APP', 'close.');
-      process.exit(0);
+process.on("SIGINT", () => {
+  server.close(() => {
+    console.info("APP", "close.");
+    process.exit(0);
   });
 });
 
-server.listen( 3000, () => {
-  console.info('APP', `listening on port 3000, in local mode.`);
+server.listen(3000, () => {
+  console.info("APP", `listening on port 3000, in local mode.`);
 });
 
 module.exports = server;
