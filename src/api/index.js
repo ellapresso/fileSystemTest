@@ -1,13 +1,11 @@
 /* 서버 시작 명령어 node index */
 const router = require("express").Router();
 const fs = require("fs");
-let dataClone = [];
+
 /* routing  game/result */
 router.post("/result", (req, res) => {
   let { point } = req.query;
   const name = req.query.name + "#" + `${new Date().getTime()}`;
-
-  let pointValue = parseInt(point.value);
 
   fs.readFile("rank.json", "utf8", (err, data) => {
     data = JSON.parse(data);
@@ -18,11 +16,11 @@ router.post("/result", (req, res) => {
     data = data.sort(function(a, b) {
       return parseInt(b["point"]) - parseInt(a["point"]);
     });
-    /* 배열 메소드가 적용이.. 안 된다... */
-    data = data.slice(0, 10);
-    fs.writeFile("rank.json", JSON.stringify(data), "utf8", function(err) {
+    /* 배열 메소드가 적용이.. 안 된다...는 무슨... 서버... 재실행 해...  */
+    const result = data.slice(0, 10);
+    fs.writeFile("rank.json", JSON.stringify(result), "utf8", function(err) {
       console.log("비동기적 파일 쓰기 완료");
-      return res.send(data);
+      return res.send(result);
     });
   });
 });
